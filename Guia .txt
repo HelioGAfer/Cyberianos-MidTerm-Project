@@ -1,0 +1,79 @@
+To meet Chewy's requirements and ensure GDPR compliance while protecting PII (Personally Identifiable Information) and PCI (Payment Card Information) data, the following steps should be taken in AWS Cloud:
+1. Proper IAM Implementation
+
+Goal: Ensure all team members have appropriate access levels with AWS best practices.
+
+    Root Account Usage: Use the root account sparingly and enable Multi-Factor Authentication (MFA) to enhance security.
+    Administrator Permissions: Grant administrator permissions only to necessary users and ensure they follow security best practices.
+
+Steps:
+
+    Create individual IAM users for each team member. DONE
+    Assign least-privilege permissions to users based on their roles. DONE
+    Enable MFA for all users with high-level access. DONE
+    Regularly review and audit IAM policies and access logs. DONE
+
+2. CIS-Compliant Data Server
+
+Goal: Secure the Linux server hosting PII and PCI data.
+
+    Encryption at Rest: Use AWS Key Management Service (KMS) to encrypt data stored on the server.
+    Encryption in Transit: Implement TLS/SSL to encrypt data during transmission.
+
+Steps:
+
+    Launch a Linux EC2 instance and configure it according to CIS benchmarks.  DONE
+    Use AWS KMS to manage encryption keys and encrypt EBS volumes attached to the instance.  DONE
+    Configure an OpenVPN server to generate keys to encrypt data in transit. DONE
+
+3. SIEM/Log Aggregation System
+
+Goal: Monitor and analyze security events in real time.
+
+    SIEM Options: Choose between Splunk Enterprise (Trial), AWS CloudWatch, or Elastic Stack. DONE
+    Real-Time Event Ingestion: Ingest logs from key assets and detect suspicious activities.
+
+Steps:
+
+    Set up the chosen SIEM tool and integrate it with AWS services.
+    Configure log sources such as CloudTrail, CloudWatch Logs, and VPC Flow Logs.
+    Create alerts for specific events, such as unauthorized access or data exfiltration attempts.
+    Set up notification channels (SMS or email) to alert administrators.
+
+4. Cloud Monitoring
+
+Goal: Detect and respond to data exfiltration attempts.
+
+    Traffic Capture: Use VPC Flow Logs to monitor network traffic.
+    Automated Response: Implement AWS Lambda to trigger responses to detected threats.
+
+Steps:
+
+    Enable VPC Flow Logs for the VPCs containing sensitive data.
+    Set up CloudWatch Alarms based on VPC Flow Log metrics.
+    Create an AWS Lambda function to execute a response, such as blocking an IP or terminating an instance, upon detecting a threat.
+
+5. Data Loss Prevention (DLP) Controls
+
+Goal: Prevent the exfiltration of PII and PCI data.
+
+    DLP Solution: Choose and implement a DLP solution to monitor data movement.
+    Configuration: Detect and block unauthorized data transfers.
+
+Steps:
+
+    Select a DLP solution compatible with AWS (e.g., AWS Macie, third-party solutions).
+    Configure policies to detect and prevent the transfer of PII and PCI data.
+    Test the DLP solution to ensure it effectively blocks unauthorized data exfiltration.
+
+6. Novelty
+
+Goal: Implement an innovative tool, system, or technique.
+
+    Challenge: Develop a unique security solution not covered in previous coursework.
+
+Suggestions:
+
+    Implement a custom machine learning model to detect anomalies in network traffic.
+    Use AWS GuardDuty to complement existing security measures and automate threat detection and response.
+    Integrate a blockchain-based audit trail for data access and modification logs.
